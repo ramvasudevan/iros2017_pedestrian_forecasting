@@ -1,0 +1,179 @@
+
+LoadBasenames()
+1
+  Number of basenames loaded:54
+
+LoadDemoTraj()
+  489.txt: trajectory length is 235
+  557.txt: trajectory length is 275
+  388.txt: trajectory length is 235
+  440.txt: trajectory length is 263
+  401.txt: trajectory length is 233
+  498.txt: trajectory length is 230
+  455.txt: trajectory length is 162
+  396.txt: trajectory length is 227
+  448.txt: trajectory length is 249
+  595.txt: trajectory length is 283
+  428.txt: trajectory length is 154
+  543.txt: trajectory length is 213
+  440.txt: trajectory length is 263
+  522.txt: trajectory length is 222
+  412.txt: trajectory length is 255
+  434.txt: trajectory length is 153
+  296.txt: trajectory length is 228
+  448.txt: trajectory length is 249
+  399.txt: trajectory length is 250
+  366.txt: trajectory length is 156
+  548.txt: trajectory length is 292
+  429.txt: trajectory length is 255
+  521.txt: trajectory length is 320
+  473.txt: trajectory length is 251
+  1084.txt: trajectory length is 272
+  390.txt: trajectory length is 231
+  401.txt: trajectory length is 233
+  510.txt: trajectory length is 248
+  490.txt: trajectory length is 236
+  403.txt: trajectory length is 233
+  345.txt: trajectory length is 239
+  400.txt: trajectory length is 248
+  520.txt: trajectory length is 278
+  472.txt: trajectory length is 156
+  605.txt: trajectory length is 230
+  423.txt: trajectory length is 242
+  391.txt: trajectory length is 238
+  400.txt: trajectory length is 248
+  365.txt: trajectory length is 208
+  508.txt: trajectory length is 218
+  400.txt: trajectory length is 248
+  958.txt: trajectory length is 252
+  384.txt: trajectory length is 237
+  483.txt: trajectory length is 215
+  633.txt: trajectory length is 156
+  271.txt: trajectory length is 222
+  365.txt: trajectory length is 208
+  358.txt: trajectory length is 151
+  593.txt: trajectory length is 232
+  382.txt: trajectory length is 233
+  638.txt: trajectory length is 226
+  657.txt: trajectory length is 234
+  381.txt: trajectory length is 220
+  527.txt: trajectory length is 239
+
+LoadFeatures()
+  489.txt: Number of features loaded is 16
+  557.txt: Number of features loaded is 16
+  388.txt: Number of features loaded is 16
+  440.txt: Number of features loaded is 16
+  401.txt: Number of features loaded is 16
+  498.txt: Number of features loaded is 16
+  455.txt: Number of features loaded is 16
+  396.txt: Number of features loaded is 16
+  448.txt: Number of features loaded is 16
+  595.txt: Number of features loaded is 16
+  428.txt: Number of features loaded is 16
+  543.txt: Number of features loaded is 16
+  440.txt: Number of features loaded is 16
+  522.txt: Number of features loaded is 16
+  412.txt: Number of features loaded is 16
+  434.txt: Number of features loaded is 16
+  296.txt: Number of features loaded is 16
+  448.txt: Number of features loaded is 16
+  399.txt: Number of features loaded is 16
+  366.txt: Number of features loaded is 16
+  548.txt: Number of features loaded is 16
+  429.txt: Number of features loaded is 16
+  521.txt: Number of features loaded is 16
+  473.txt: Number of features loaded is 16
+  1084.txt: Number of features loaded is 16
+  390.txt: Number of features loaded is 16
+  401.txt: Number of features loaded is 16
+  510.txt: Number of features loaded is 16
+  490.txt: Number of features loaded is 16
+  403.txt: Number of features loaded is 16
+  345.txt: Number of features loaded is 16
+  400.txt: Number of features loaded is 16
+  520.txt: Number of features loaded is 16
+  472.txt: Number of features loaded is 16
+  605.txt: Number of features loaded is 16
+  423.txt: Number of features loaded is 16
+  391.txt: Number of features loaded is 16
+  400.txt: Number of features loaded is 16
+  365.txt: Number of features loaded is 16
+  508.txt: Number of features loaded is 16
+  400.txt: Number of features loaded is 16
+  958.txt: Number of features loaded is 16
+  384.txt: Number of features loaded is 16
+  483.txt: Number of features loaded is 16
+  633.txt: Number of features loaded is 16
+  271.txt: Number of features loaded is 16
+  365.txt: Number of features loaded is 16
+  358.txt: Number of features loaded is 16
+  593.txt: Number of features loaded is 16
+  382.txt: Number of features loaded is 16
+  638.txt: Number of features loaded is 16
+  657.txt: Number of features loaded is 16
+  381.txt: Number of features loaded is 16
+  527.txt: Number of features loaded is 16
+
+LoadImages()
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Loading: ioc_demo/walk_imag/topdown.jpg
+  Number of images loaded: 54
+
+Initialize()
+
+ComputeEmpiricalStatistics()
+  add feature counts for 489.txt
+  add feature counts for 557.txt
