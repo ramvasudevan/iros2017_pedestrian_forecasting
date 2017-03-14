@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.metrics import roc_curve, auc, precision_recall_curve
 from sys import argv
 import os
+from os.path import join
 #name = argv[1]
 
 def fn(paths):
@@ -16,7 +17,7 @@ def fn(paths):
             undscrs = [i for i, ltr in enumerate(file) if ltr == "_"]
             ag_num = int(file[undscrs[1]+1:undscrs[2]])
             t = int(file[undscrs[3]+1:file.find(".")])
-            arr = np.load(path + file)
+            arr = np.load(join(path, file))
             fs_pr.append((ag_num, t, arr)) if "pr" in file else fs_tr.append((ag_num, t, arr))
 
     ag_nums = [x[0] for x in fs_tr]

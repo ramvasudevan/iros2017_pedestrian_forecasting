@@ -211,7 +211,8 @@ if __name__ == "__main__":
     print "Testing clustering routine"
     import numpy as np
     import process_data
-    folder = '../annotations/bookstore/video3/'
+    from os.path import join
+    folder = join(os.pardir, 'annotations', 'bookstore', 'video3')
     BB_ts_list, width, height = process_data.get_BB_ts_list(folder, label="Biker")
     curve_list = map(process_data.BB_ts_to_curve, BB_ts_list)
 

@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import cv2
 from sys import argv
+from os.path import join
 
 scene_number = int(argv[1])
 split_number = int(argv[2])
@@ -32,10 +33,10 @@ width = data[scene_number][1][0]
 height = data[scene_number][1][1]
 sf = width
 print data[scene_number][0]
-mkdir("pickles/kitani/{}".format(data[scene_number][0]))
+mkdir(join("pickles", "kitani", "{}").format(data[scene_number][0]))
 
 scene, test_set, _ = all_data[scene_number][ind]
-mkdir("pickles/kitani/{}/{}".format(data[scene_number][0], ind))
+mkdir(join("pickles", "kitani", "{}", "{}").format(data[scene_number][0], ind))
 
 def coord_change(begin, end):
     begin[0] += scene.width/2.0
@@ -91,13 +92,13 @@ for j, agent in enumerate(test_set):
     begin, end = coord_change(begin, end)
     print begin
     print end
-    with open("kitani/{}/{}/walk_terminal_pts.txt".format(data[scene_number][0], ind), "w") as f:
+    with open(join("kitani", "{}", "{}", "walk_terminal_pts.txt").format(data[scene_number][0], ind), "w") as f:
         f.write("{} {}\n{} {}".format(int(begin[0]), int(begin[1]), int(end[0]), int(end[1])))
-    process = subprocess.Popen(["./kitani/theirs", "{}/{}".format(data[scene_number][0], ind)], stdout=subprocess.PIPE)
+    process = subprocess.Popen([join( os.getcwd(), "kitani", "theirs"), os.join("{}", "{}").format(data[scene_number][0], ind)], stdout=subprocess.PIPE)
     output, err = process.communicate()
     print output
 
-    ls = os.listdir("kitani/{}/{}/frames".format(data[scene_number][0], ind))
+    ls = os.listdir(join("kitani", "{}", "{}", "frames").format(data[scene_number][0], ind))
     ln = len(ls)
     dic = [0 for x in range(ln)]
     for file in ls:
@@ -107,7 +108,7 @@ for j, agent in enumerate(test_set):
         print num
         if num >= ln:
             continue
-        datum = cv2.cv.Load("kitani/{}/{}/frames/".format(data[scene_number][0], ind) + file)
+        datum = cv2.cv.Load(join("kitani","{}","{}","frames","{}").format(data[scene_number][0], ind, file))
         datum = np.array(datum)
         xs = []
         ys = []
@@ -129,8 +130,8 @@ for j, agent in enumerate(test_set):
         pr_lin, tr_lin = evaluate_lin([scene.width, scene.height], rhol, rt, box_w, debug_level=0)
         false_pos, true_pos, thresh = roc_curve(tr_lin, pr_lin)
         dic[num] = auc(false_pos, true_pos)
-        np.save("pickles/kitani/{}/{}/pr_agent_{}_time_{}".format(data[scene_number][0], ind, j, num), pr_lin)
-        np.save("pickles/kitani/{}/{}/tr_agent_{}_time_{}".format(data[scene_number][0], ind, j, num), tr_lin)
+        np.save(join("pickles", "kitani", "{}", "{}", "pr_agent_{}_time_{}").format(data[scene_number][0], ind, j, num), pr_lin)
+        np.save(join("pickles", "kitani", "{}", "{}", "tr_agent_{}_time_{}").format(data[scene_number][0], ind, j, num), tr_lin)
         ctx = int(np.ceil(scene.width/box_w))
         cty = int(np.ceil(scene.height/box_w))
         plt.title("ROC for agent {} t={}".format(j, num))
@@ -141,12 +142,12 @@ for j, agent in enumerate(test_set):
         ax[0].set_xlabel("False Positive Rate\nAUC={}".format(dic[num]))
         ax[0].plot(false_pos, true_pos)
         ax[1].imshow(pr_lin.reshape(ctx, cty).transpose(), origin="lower", extent=[-scene.width/2,scene.width/2,-scene.height/2,scene.height/2], cmap="viridis")
-        ax[1].imshow(mpimg.imread("kitani/{}/{}/walk_birdseye.jpg".format(data[scene_number][0], ind)), extent=[-scene.width/2, scene.width/2,-scene.height/2,scene.height/2], alpha=0.5)
+        ax[1].imshow(mpimg.imread(join("kitani", "{}", "{}", "walk_birdseye.jpg").format(data[scene_number][0], ind)), extent=[-scene.width/2, scene.width/2,-scene.height/2,scene.height/2], alpha=0.5)
         ax[1].scatter(curve[0][int((len(curve[0]))/float(ln) * num)], curve[1][ int(len(curve[0])/float(ln) * num)], s=20, c="white")
         plt.plot(curve1[0], curve1[1])
-        mkdir("images/kitani/{}".format(data[scene_number][0]))
-        mkdir("images/kitani/{}/{}".format(data[scene_number][0], ind))
-        plt.savefig("images/kitani/{}/{}/AUC_for_agent_{}_t={}.png".format(data[scene_number][0], ind, j, num))
+        mkdir(join("images", "kitani", "{}").format(data[scene_number][0]))
+        mkdir(join("images", "kitani", "{}", "{}").format(data[scene_number][0], ind))
+        plt.savefig(join("images", "kitani", "{}", "{}", "AUC_for_agent_{}_t={}.png").format(data[scene_number][0], ind, j, num))
         plt.clf()
         plt.close('all')
     #np.save("pickles/kitani/{}/AUC_agent_{}".format(scene_number, j), np.array(dic))
@@ -159,5 +160,5 @@ for j, agent in enumerate(test_set):
     #ax.plot([x for x in range(ln)], dic)
     #plt.savefig("images/kitani/AUC_for_agent_{}.png".format(j))
     #plt.clf()
-    [os.remove("kitani/{}/{}/frames/".format(data[scene_number][0], ind) + x) for x in os.listdir("kitani/{}/{}/frames".format(data[scene_number][0], ind))]
+    [os.remove(join("kitani", "{}", "{}", "frames", "{}").format(data[scene_number][0], ind, x)) for x in os.listdir(join("kitani", "{}", "{}", "frames").format(data[scene_number][0], ind))]
 

@@ -2,6 +2,7 @@ from data import sets, scenes
 import numpy as np
 from sys import argv
 import os
+from os.path import join
 from process_data import BB_ts_to_curve as bbts
 import subprocess
 from sklearn.metrics import roc_curve, auc, precision_recall_curve
@@ -59,9 +60,9 @@ def f(i):
     begin, end = coord_change(begin, end)
     print begin
     print end
-    with open("kitani/oc_demo/walk_terminal_pts.txt", "w") as f:
+    with open(join("kitani", "oc_demo", "walk_terminal_pts.txt"), "w") as f:
         f.write("{} {}\n{} {}".format(int(begin[0]), int(begin[1]), int(end[0]), int(end[1])))
-    process = subprocess.Popen(["./kitani/theirs", "oc_demo"], stdout=subprocess.PIPE)
+    process = subprocess.Popen([join(os.getcwd(), "kitani" "theirs"), "oc_demo"], stdout=subprocess.PIPE)
     output, err = process.communicate()
 
 import time

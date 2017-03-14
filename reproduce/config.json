@@ -1,1 +1,3 @@
-{"nfold": 5}
+{"nfold": 5,
+ "annotations": "../annotations"}
+

@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from data import all_data
 from process_data import BB_ts_to_curve as bbts
+from os.path import join
 
 import json
 
@@ -40,15 +41,15 @@ def mkdir(fname):
 for sn, scene in enumerate(all_data):
     scene_name = order[sn]
     print scene_name
-    mkdir("virat/" + scene_name)
+    mkdir(join("virat", scene_name))
     width = 200
     for trial, (test_scene, _, train_set) in enumerate(scene):
-        mkdir("virat/" + scene_name + "/{}".format(trial))
+        mkdir(join("virat", scene_name, "{}").format(trial))
 
         runner_index = 0
         duration = 0
 
-        names = open("virat/{}/{}/walk_basenames.txt".format(scene_name, trial), "w")
+        names = open(join("virat", "{}", "{}", "walk_basenames.txt").format(scene_name, trial), "w")
         for ind, agent in enumerate(train_set):
             agent = bbts(agent)
             agent[0] += test_scene.width/2.0
@@ -123,7 +124,7 @@ for sn, scene in enumerate(all_data):
             #if len(inc) == 0:
             #    print "not including"
              #    continue
-            with open("virat/{}/{}/{}.txt".format(scene_name, trial, ind), "w") as f:
+            with open(join("virat", "{}","{}", "{}.txt").format(scene_name, trial, ind), "w") as f:
                 f.write(st)
             names.write("{}.txt".format(ind) + "\n")
         names.close()

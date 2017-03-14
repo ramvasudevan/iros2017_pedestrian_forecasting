@@ -7,6 +7,7 @@ from data import sets, scenes, all_data
 from process_data import BB_ts_to_curve as bbts
 from helper_routines import ct
 import json
+from os.path import join
 def mkdir(fname):
     try:
         os.mkdir(fname)
@@ -27,8 +28,8 @@ json_acceptable_string = st.replace("'", "\"")
 scene_order = json.loads(json_acceptable_string)
 scene_name = scene_order['order'][scene_number]
 width, height = ct(scene, scene.width/40.0)
-reference = scene_order['folders'][scene_number] + "reference.jpg"
-folders = [ x + "{}/{}/".format(scene_name, split_index) for x in dic['folders']]
+reference = join(scene_order['folders'][scene_number], "reference.jpg")
+folders = [ join(x, "{}", "{}").format(scene_name, split_index) for x in dic['folders']]
 labels = dic['labels']
 
 
@@ -39,7 +40,7 @@ times = dic['times']
 
 fnames = ["pr_agent_{}_time_{}.npy".format(agent, t) for t in times]
 
-methods = [[np.load(x + f) for f in fnames] for x in folders]
+methods = [[np.load(join(x, f)) for f in fnames] for x in folders]
 mx = np.amax(np.array([[np.amax(x) for x in row] for row in methods]))
 nummth = len(methods)
 numt = len(times)
@@ -66,9 +67,9 @@ for parad in range(nummth):
         tmp.scatter(begin[0], begin[1], marker="o", c="white", edgecolors="none", s=dic['markersize'])
         tmp.scatter(end[0], end[1], marker="x", c="white", edgecolors="none", s=dic['markersize'])
         tmp.scatter(curve[0, times[time]], curve[1, times[time]], marker="D", c="white",  edgecolors="none", s=dic['markersize'])
-        mkdir("images/{}/".format(scene_name))
-        mkdir("images/{}/{}".format(scene_name, labels[parad]))
-        plt.savefig("images/{}/{}/{}_{}_split_{}_agent_{}_time_{}.eps".format(scene_name, labels[parad], scene_name, labels[parad], split_index, agent, times[time]), format="eps", bbox_inches="tight")
+        mkdir(join("images", "{}").format(scene_name))
+        mkdir(join("images","{}","{}").format(scene_name, labels[parad]))
+        plt.savefig(join("images", "{}", "{}","{}_{}_split_{}_agent_{}_time_{}.eps").format(scene_name, labels[parad], scene_name, labels[parad], split_index, agent, times[time]), format="eps", bbox_inches="tight")
 #plt.suptitle(dic['title'], size=dic['titlesize'])
 #plt.subplots_adjust( wspace=dic['imgspacing'], hspace=dic['imgspacing'])
 #plt.savefig("{}x{} grid.eps".format(nummth, numt), format="eps")

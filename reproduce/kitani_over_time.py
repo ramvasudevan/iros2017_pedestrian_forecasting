@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.metrics import roc_curve, auc, precision_recall_curve
 from sys import argv
 import os
+from os.path import join
 #name = argv[1]
 
 def fn(paths):
@@ -17,7 +18,7 @@ def fn(paths):
             undscrs = [i for i, ltr in enumerate(file) if ltr == "_"]
             ag_num = int(file[undscrs[1]+1:undscrs[2]])
             t = int(file[undscrs[3]+1:file.find(".")])
-            arr = np.load(path + file)
+            arr = np.load(join(path, file))
             fs_pr.append((ag_num, t, arr)) if "pr" in file else fs_tr.append((ag_num, t, arr))
 
     ag_nums = [x[0] for x in fs_tr]
@@ -65,9 +66,9 @@ params = read_json("params.json")
 rng = [0, 1, 2, 3]
 n_fold = [0, 1]
 sm = lambda x, y: x + y
-paths_kit = reduce(sm, [["pickles/kitani/{}/{}/".format(order[x], j) for j in n_fold] for x in rng])
-paths_ours = reduce(sm, [["pickles/ours/{}/{}/".format(order[x], j) for j in n_fold] for x in rng])
-paths_rand = reduce(sm, [["pickles/rand/{}/{}/".format(order[x], j) for j in n_fold] for x in rng])
+paths_kit = reduce(sm, [[join("pickles", "kitani", "{}", "{}").format(order[x], j) for j in n_fold] for x in rng])
+paths_ours = reduce(sm, [[join("pickles", "ours", "{}", "{}").format(order[x], j) for j in n_fold] for x in rng])
+paths_rand = reduce(sm, [[join("pickles", "rand", "{}", "{}").format(order[x], j) for j in n_fold] for x in rng])
 
 #our_auc, our_times = fn(paths_ours)
 #kit_auc, kit_times = fn(paths_kit)
@@ -103,7 +104,7 @@ def cold_blooded_murder(paths):
             undscrs = [i for i, ltr in enumerate(file) if ltr == "_"]
             ag_num = int(file[undscrs[1]+1:undscrs[2]])
             t = int(file[undscrs[3]+1:file.find(".")])
-            arr = np.load(path + file)
+            arr = np.load(join(path, file))
             fs_pr.append((ag_num, t, arr)) if "pr" in file else fs_tr.append((ag_num, t, arr))
     print "begin second for"
     all_data = []
@@ -151,7 +152,7 @@ plt.plot(fpr_kit, tpr_kit, ls="dashed", c="black", label="Kitani Algorithm")
 #plt.plot(lin_times, lin_auc, ls="dashdot", c="black", label="Linear Predictor")
 plt.plot(fpr_rand, tpr_rand, ls="dashdot", c="black", label="Random Walk")
 plt.legend(loc="lower right")
-plt.savefig('images/The ROC Results.eps', format='eps')
+plt.savefig(join("images", "The ROC Results.eps"), format='eps')
 print "end plot"
 plt.show()
 

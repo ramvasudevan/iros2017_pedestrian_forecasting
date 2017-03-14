@@ -1,4 +1,5 @@
 import numpy as np
+from os.path import join
 
 def get_BB_ts_list( folder , label='Pedestrian' ):
     """ Returns trajectories and height and width of a domain
@@ -23,7 +24,7 @@ def get_BB_ts_list( folder , label='Pedestrian' ):
     # GET POSITIONS
     data = data[ data.lost != 1]
     from PIL import Image
-    fname = folder + 'reference.jpg'
+    fname = join(folder, 'reference.jpg')
     im = Image.open(fname)
     width,height = im.size
     ids = set( data[ data['label']==label ]['id'])
