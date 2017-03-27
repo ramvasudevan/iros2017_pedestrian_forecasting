@@ -155,10 +155,3 @@ plt.legend(loc="lower right")
 plt.savefig(join("images", "The ROC Results.eps"), format='eps')
 print "end plot"
 plt.show()
-
-
-
-
-
-
-
