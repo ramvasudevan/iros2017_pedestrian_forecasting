@@ -1,0 +1,7 @@
+Generation of scenes script
+
+Generation of kitani data
+
+Generation of our data
+
+Analysis of all data.
