@@ -1,6 +1,8 @@
 import numpy as np
+from os.path import join
+from json_help import read_json
 
-def get_BB_ts_list( folder , label='Pedestrian' ):
+def get_BB_ts_list( folder , ):
     """ Returns trajectories and height and width of a domain
 
     args:
@@ -14,7 +16,7 @@ def get_BB_ts_list( folder , label='Pedestrian' ):
     """
     import pandas as pd
 
-    data = pd.read_csv( folder + 'annotations.txt', sep=" ")
+    data = pd.read_csv(join(folder, 'annotations.txt'), sep=" ")
     data.columns = ['id',
             'x1','y1','x2','y2',
             'frame',
@@ -22,10 +24,15 @@ def get_BB_ts_list( folder , label='Pedestrian' ):
             'label']
     # GET POSITIONS
     data = data[ data.lost != 1]
-    from PIL import Image
-    fname = folder + 'reference.jpg'
-    im = Image.open(fname)
-    width,height = im.size
+    fname = join(folder, "params.json")
+    dic = read_json(fname)
+    width = dic["width"]
+    height = dic["height"]
+    try:
+        label = dic["label"]
+    except:
+        label = "Pedestrian"
+
     ids = set( data[ data['label']==label ]['id'])
     BB_ts_list = [ data[ data['id'] == id ].loc[:,'x1':'y2'].values.transpose() for id in ids ]
 

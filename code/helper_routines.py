@@ -5,6 +5,8 @@ from scipy.special import erf
 from data import scenes
 
 
+
+
 def ct(scene, width):
     ctx = int(np.ceil(scene.width/width))
     cty = int(np.ceil(scene.height/width))
