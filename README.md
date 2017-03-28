@@ -2,9 +2,6 @@
 
 This project seeks to predict pedestrian position seconds in the future with a millisecond time-budget.  The motivation for this project is for inclusion in autonomous vehicle software, which requires real-time forecasting of pedestrian actions.
 
-## Files
-
-
 ## Usage
 
 ### How to use this library###
@@ -53,9 +50,19 @@ In the same folder as `annotations`, make a file called `params.json`. The file 
 Then run `python make_scene.py path/to/folder`, and pass the path to the folder containing `annotations.txt` and `params.json`. If your data is well formatted, it should build a scene and put it in the `scene_folder` specified in `config.json`.
 
 
+## Files
+
+While technically a particularly masochistic person could use the code in ```reproduce``` in their own project, but I believe that all that needs to be documented about the  folder is that you can reproduce the analysis from the paper by running ```python analysis.py```, and looking in ```output```. I'll document this further once I've actually written the files.
+
+To actually use the good version of our code, look in ```code```. 
+
 
 ## Contributors
+
+[Owen Hughes](mailto:owhughes@umich.edu)
 
 Henry O. Jacobs
 
 ## License
+
+
