@@ -161,7 +161,8 @@ def full_model_generator(scene_name, x_hat, v_hat, t_final, N_steps, convolve=Fa
         yield (x_out, w_out/ prob_of_mu), (x_lin, w_lin/prob_of_mu)
     pass
 
-def linear_generator(x_hat, v_hat, t_final, N_steps):
+def linear_generator(name, x_hat, v_hat, t_final, N_steps):
+    set_scene(scenes[names.index(name)])
     x_span = np.linspace( -scene.width/2, scene.width/2, 250)
     dx = x_span[1] - x_span[0]
     y_span = np.linspace( -scene.height/2, scene.height/2, 250)

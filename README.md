@@ -68,7 +68,7 @@ The output of the model is a tuple `((non_linear_points, non_linear_weights), (l
 
 ** _The non-linear output must be convolved with the gaussian distribution described here in order to be correct. _ ** This is why the different points are split into two outputs. The linear points are treated as dirac deltas, so the probability of a pedestrian being in a set A is just the sum of the dirac deltas in that set. 
 
-The non-linear weights are treated as dirac deltas convolved with gaussians of standard deviation `scene.kappa * (n / n_steps) * t_final`, where n corresponds to the number of frames that have come from the generator. The `convolve_and_score` method from `helper_routines` takes a set of points, weights, the standard deviation, and a set of bounding boxes to integrate over, and returns the convolved integral over that box. If you know the form, you can likely extend and improve what we've put together.
+The non-linear weights are treated as dirac deltas convolved with gaussians of standard deviation `scene.kappa * (n / n_steps) * t_final`, where n corresponds to the number of frames that have come from the generator. The `convolve_and_score` method from `helper_routines` takes a set of points, weights, the standard deviation, and a set of bounding boxes to integrate over, and returns the convolved integral over those boxes. If you know the form, you can likely extend and improve what we've put together.
 
 
 
