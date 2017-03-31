@@ -1,6 +1,6 @@
 import numpy as np
 from os.path import join
-from json_help import read_json
+from util import read_json
 
 def get_BB_ts_list( folder , ):
     """ Returns trajectories and height and width of a domain

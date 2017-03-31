@@ -33,7 +33,7 @@ class Scene():
  
 
     """
-    def __init__( self, BB_ts_ls, width, height, k_max_alpha=6, k_max_theta=6):
+    def __init__( self, name, BB_ts_ls, width, height, k_max_alpha=6, k_max_theta=6):
         """ Initializer
 
         args:
@@ -60,6 +60,7 @@ class Scene():
         self.sigma_L = process_data.get_std_velocity( BB_ts_ls )
         self.sigma_x = process_data.get_std_measurement_noise( curve_ls )
         self.sigma_v = 2*self.sigma_x
+        self.name = name
 
         #Learn the  agent_classes
         from cluster import get_classes

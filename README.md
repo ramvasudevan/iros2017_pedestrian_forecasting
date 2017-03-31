@@ -1,8 +1,8 @@
 ## Synopsis
 
-This project seeks to predict pedestrian position seconds in the future with a millisecond time-budget.  The motivation for this project is for inclusion in autonomous vehicle software, which requires real-time forecasting of pedestrian actions. The paper can be read [here](google.com)
+This project seeks to predict pedestrian position seconds in the future with a millisecond time-budget.  The motivation for this project is for inclusion in autonomous vehicle software, which requires real-time forecasting of pedestrian actions. The paper can be read [here](https://google.com).
 
-It should be fairly self evident from this document how this is implemented. If you find errors, unclear sections in this document, or problems with installation, please contact me at [owhughes@umich.edu](mailto:owhughes@umich.edu)
+It should be fairly self evident from this document how this is implemented. If you find errors, unclear sections in this document, or problems with installation, please contact me at [owhughes@umich.edu](mailto:owhughes@umich.edu).
 
 ## Installation gotchas ##
 Ensure that `scipy` is the most recent version available on your OS.
@@ -40,12 +40,43 @@ In the same folder as `annotations`, make a file called `params.json`. The file 
 
 Then run `python make_scene.py path/to/folder`, and pass the path to the folder containing `annotations.txt` and `params.json`. If your data is well formatted, it should build a scene and put it in the `scene_folder` specified in `config.json`.
 
+### Generating results ###
+
+The scene that's generated has dimensions `[1.0, height/width]`, centered at `[0,0]`. This determines the units that you pass into the model. Our model implementation preserves the units you pass into it.
+
+The inputs to the model are the name of the scene you want to use, the position measurement (a 1x2 numpy array) that's measured in the scene dimensions listed above, the velocity measured in units/frame (1x2 numpy array), the time horizon you're simulating over (float), and the number of steps to simulate (int).
+
+To generate results:
+```
+from distributions import full_model_generator
+import numpy as np
+
+
+prefix = "test" 
+x_hat = np.array([0, 0])
+v_hat = np.array([0, -.001])
+t_final = 300
+n_steps = 300
+
+
+gen = full_model_generator(prefix, x_hat, v_hat, t_final, N_steps)
+for ((nl_pts_n, nl_wts_n), (linear_pts_n, linear_wts_n)) in gen:
+     pass
+```
+
+The output of the model is a tuple `((non_linear_points, non_linear_weights), (linear_points, linear_weights))`. Each points array is of size `(2, N)`, which means the array looks like `[[x1, x2, x3, x4, ...], [y1, y2, y3, y4, ...]]`. Each of the weights arrays are of size `(N)`, each of which correspond to one of the points in the point arrays.
+
+** _The non-linear output must be convolved with the gaussian distribution described here in order to be correct. _ ** This is why the different points are split into two outputs. The linear points are treated as dirac deltas, so the probability of a pedestrian being in a set A is just the sum of the dirac deltas in that set. 
+
+The non-linear weights are treated as dirac deltas convolved with gaussians of standard deviation `scene.kappa * (n / n_steps) * t_final`, where n corresponds to the number of frames that have come from the generator. The `convolve_and_score` method from `helper_routines` takes a set of points, weights, the standard deviation, and a set of bounding boxes to integrate over, and returns that. If you know the form, you can likely extend and improve what we've put together.
+
+
 
 ## Files
 
-While technically a particularly masochistic person could use the code in ```reproduce``` in their own project, I believe that all that needs to be documented about the  folder is that you can reproduce the analysis from the paper by running ```python analysis.py```, and looking in ```output```. I'll document this further once I've actually written the files.
+While a particularly masochistic person could use the code in `reproduce` in their own project, I believe that all that needs to be documented about that folder is that you can reproduce the analysis from the paper by running `python analysis.py`, and looking in `output`. I'll document this further once I've actually written the files.
 
-To actually use the good version of our code, look in ```code```. 
+To actually use the good version of our code, look in `code`.
 
 
 ## Contributors

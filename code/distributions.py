@@ -15,8 +15,7 @@ from derived_posteriors import joint_k_s_x_x_hat_v_hat
 from derived_posteriors import joint_lin_x_t_x_hat_v_hat
 from derived_posteriors import joint_k_x_x_hat_v_hat
 
-
-from data import scene
+from data import scene, scenes, names
 
 
 Vk = scene.alpha_arr
@@ -30,14 +29,11 @@ sigma_v = scene.sigma_v
 sigma_L = scene.sigma_L
 kappa = scene.kappa
 
-def set_scene(num_scene, custom_scene = None):
+def set_scene(scn):
     global scene, Vk, scene_scale, dist_width, vel_width, s_max, sigma_x, sigma_v, sigma_L, kappa
     from data import scenes
-    if custom_scene != None:
-        scene = custom_scene
-    else:
-        scene = scenes[num_scene]
-    Vk = scene.alpha_arr
+    scene = scn
+    Vk = scn.alpha_arr
     scene_scale = np.array([scene.width, scene.height])
     #temporary
     dist_width = np.ones([2]) * scene.bbox_width
@@ -47,7 +43,7 @@ def set_scene(num_scene, custom_scene = None):
     sigma_v = scene.sigma_v
     sigma_L = scene.sigma_L
     kappa = scene.kappa
-    derived_posteriors.set_scene(num_scene, custom_scene = custom_scene)
+    derived_posteriors.set_scene(0, custom_scene = scene)
 
 
 def integrate_class(k, x0, T, N_steps):
@@ -75,7 +71,7 @@ def integrate_class(k, x0, T, N_steps):
     x_arr = np.concatenate([x_forward, x_backward[1:]])
     return x_arr.reshape( (2*N_steps+1, 2, N) )
 
-def particle_generator(x_hat, v_hat, t_final, N_steps, convolve=True):
+def full_model_generator(scene_name, x_hat, v_hat, t_final, N_steps, convolve=False):
     """
     a generator which gives particles and weights
     Takes:
@@ -89,6 +85,7 @@ def particle_generator(x_hat, v_hat, t_final, N_steps, convolve=True):
         plt.scatter(x[0], x[1]) #NOTE: This plots the points
         print w.sum() #This p(rints the total mass
     """
+    set_scene(scenes[names.index(scene_name)])
     num_nl_classes = len(scene.P_of_c)-1
     
     #Initializes particles for nonlinear classes
@@ -123,7 +120,7 @@ def particle_generator(x_hat, v_hat, t_final, N_steps, convolve=True):
                 k, x0, x_hat, v_hat) #TODO: Memoize??
 
     veloc = [scene.director_field_vectorized(k, x0) for k in range(num_nl_classes)]
-    for n in range(1,N_steps):
+    for n in range(1, N_steps):
         #The following computations handle the nonlinear classes
         t = n * t_final / float(N_steps)
         ds = s_max / n

@@ -16,7 +16,7 @@ def make_scene(folder):
     BB_ts_list, width, height = process_data.get_BB_ts_list(folder)
     kf = KFold(n_splits = 10)
     train_set, test_set = train_test_split( BB_ts_list, random_state = 0 )
-    test_scene = Scene( train_set, width, height )
+    test_scene = Scene(prefix, train_set, width, height )
 
     print "P(k) = {}".format(test_scene.P_of_c)
 
